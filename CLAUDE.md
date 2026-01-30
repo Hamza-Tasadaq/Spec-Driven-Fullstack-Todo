@@ -4,6 +4,106 @@ This file is generated during init for the selected agent.
 
 You are an expert AI assistant specializing in Spec-Driven Development (SDD). Your primary goal is to work with the architext to build products.
 
+---
+
+## Project Overview: Todo Full-Stack Web Application
+
+Transform a console todo app into a modern multi-user web application with persistent storage using the Agentic Dev Stack workflow.
+
+### Technology Stack
+
+| Layer          | Technology                    |
+|----------------|-------------------------------|
+| Frontend       | Next.js 16+ (App Router)      |
+| Backend        | Python FastAPI                |
+| ORM            | SQLModel                      |
+| Database       | Neon Serverless PostgreSQL    |
+| Spec-Driven    | Claude Code + Spec-Kit Plus   |
+| Authentication | Better Auth (JWT)             |
+
+### Core Requirements
+
+1. Implement all 5 Basic Level features as a web application
+2. Create RESTful API endpoints
+3. Build responsive frontend interface
+4. Store data in Neon Serverless PostgreSQL database
+5. Authentication – Implement user signup/signin using Better Auth
+
+### Development Approach
+
+Use the Agentic Dev Stack workflow:
+1. Write spec (`/sp.specify`)
+2. Generate plan (`/sp.plan`)
+3. Break into tasks (`/sp.tasks`)
+4. Implement via Claude Code (`/sp.implement`)
+
+**No manual coding allowed** - all implementation through Claude Code agents.
+
+---
+
+## Specialized Agents
+
+Use the following agents for their respective domains:
+
+### Auth Agent (`auth-security`)
+**Use for:** Authentication and security implementation
+- User signup/signin flows with Better Auth
+- JWT token generation and validation
+- Session management
+- Password hashing and security
+- Protected route implementation
+- Rate limiting and brute force protection
+
+### Frontend Agent (`nextjs-frontend-architect`)
+**Use for:** Next.js frontend development
+- Responsive UI components with App Router
+- Server/Client component architecture
+- Authentication UI (login, signup, logout)
+- Todo list interface (CRUD operations)
+- Form validation and error handling
+- Performance optimization
+
+### DB Agent (`neon-database-ops`)
+**Use for:** Database design and operations
+- Schema design for users and tasks tables
+- Neon Serverless PostgreSQL configuration
+- Connection pooling for serverless
+- Migrations with Alembic
+- Row-level security policies
+- Query optimization
+
+### Backend Agent (`fastapi-backend`)
+**Use for:** FastAPI backend development
+- RESTful API endpoint design
+- Pydantic schemas for request/response validation
+- SQLModel integration
+- JWT token verification middleware
+- Error handling and status codes
+- CORS configuration
+
+---
+
+## Authentication Architecture (Better Auth + JWT)
+
+### Authentication Flow
+
+```
+1. User logs in on Frontend → Better Auth creates session and issues JWT token
+2. Frontend makes API call → Includes JWT token in Authorization: Bearer <token> header
+3. Backend receives request → Extracts token from header, verifies signature using shared secret
+4. Backend identifies user → Decodes token to get user ID, email, etc.
+5. Backend filters data → Returns only tasks belonging to that user
+```
+
+### JWT Configuration
+
+- Better Auth configured to issue JWT tokens on login
+- Shared secret between frontend (Better Auth) and backend (FastAPI)
+- Token includes: user ID, email, expiration
+- Backend middleware validates token on protected routes
+
+---
+
 ## Task context
 
 **Your Surface:** You operate on a project level, providing guidance to users and executing development tasks via a defined set of tools.
@@ -208,3 +308,12 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## Active Technologies
+- Python 3.13+ with UV package manager + FastAPI, SQLModel, asyncpg, PyJWT, python-dotenv (001-backend-api)
+- Neon Serverless PostgreSQL (connection pooling enabled) (001-backend-api)
+- TypeScript 5.x (strict mode) + Next.js 16+, Better Auth, React Hook Form, Tailwind CSS, Lucide Reac (002-nextjs-frontend)
+- N/A (API handles persistence); localStorage for JWT tokens (002-nextjs-frontend)
+
+## Recent Changes
+- 001-backend-api: Added Python 3.13+ with UV package manager + FastAPI, SQLModel, asyncpg, PyJWT, python-dotenv
